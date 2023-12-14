@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:weatherapp/data/current/models/current_weather.dart';
+import 'package:weatherapp/data/current/models/current_weather_model.dart';
 import 'package:weatherapp/data/current/models/location.dart';
 
 class Current {
   final Location location;
-  final CurrentWeather current;
-  
+  final CurrentWeatherModel current;
+
   Current({
     required this.location,
     required this.current,
@@ -14,7 +14,7 @@ class Current {
 
   Current copyWith({
     Location? location,
-    CurrentWeather? current,
+    CurrentWeatherModel? current,
   }) {
     return Current(
       location: location ?? this.location,
@@ -32,13 +32,14 @@ class Current {
   factory Current.fromMap(Map<String, dynamic> map) {
     return Current(
       location: Location.fromMap(map['location']),
-      current: CurrentWeather.fromMap(map['current']),
+      current: CurrentWeatherModel.fromMap(map['current']),
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory Current.fromJson(String source) => Current.fromMap(json.decode(source));
+  factory Current.fromJson(String source) =>
+      Current.fromMap(json.decode(source));
 
   @override
   String toString() => 'Current(location: $location, current: $current)';
@@ -46,10 +47,10 @@ class Current {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Current &&
-      other.location == location &&
-      other.current == current;
+        other.location == location &&
+        other.current == current;
   }
 
   @override

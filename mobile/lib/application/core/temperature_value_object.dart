@@ -11,11 +11,11 @@ enum TemperatureUnit {
       };
 }
 
-class Temperature {
+class TemperatureValueObject {
   final double value;
   final TemperatureUnit unit;
 
-  const Temperature({
+  const TemperatureValueObject({
     required this.value,
     required this.unit,
   });
@@ -24,7 +24,9 @@ class Temperature {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is Temperature && other.value == value && other.unit == unit;
+    return other is TemperatureValueObject &&
+        other.value == value &&
+        other.unit == unit;
   }
 
   @override

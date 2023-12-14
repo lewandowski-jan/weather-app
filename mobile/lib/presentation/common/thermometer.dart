@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:weatherapp/application/core/temperature.dart';
+import 'package:provider/provider.dart';
+import 'package:weatherapp/application/core/temperature_value_object.dart';
+import 'package:weatherapp/data/current/current_weather_repository.dart';
 import 'package:weatherapp/presentation/common/gradient_extension.dart';
 
 class Thermometer extends StatelessWidget {
-  final Temperature temperature;
+  final TemperatureValueObject temperature;
 
   const Thermometer({
     super.key,
     required this.temperature,
   });
 
-  static const Temperature _minTemperature = Temperature(
+  static const TemperatureValueObject _minTemperature = TemperatureValueObject(
     value: -12,
     unit: TemperatureUnit.celsius,
   );
 
-  static const Temperature _maxTemperature = Temperature(
+  static const TemperatureValueObject _maxTemperature = TemperatureValueObject(
     value: 36,
     unit: TemperatureUnit.celsius,
   );
@@ -38,7 +40,7 @@ class Thermometer extends StatelessWidget {
     ],
   );
 
-  Color _getColor(Temperature temperature) {
+  Color _getColor(TemperatureValueObject temperature) {
     final value = temperature.value;
     final minValue = _minTemperature.value;
     final maxValue = _maxTemperature.value;
@@ -49,7 +51,7 @@ class Thermometer extends StatelessWidget {
     )!;
   }
 
-  double _getHeightFactor(Temperature temperature) {
+  double _getHeightFactor(TemperatureValueObject temperature) {
     final value = temperature.value;
     final minValue = _minTemperature.value;
     final maxValue = _maxTemperature.value;
@@ -67,6 +69,7 @@ class Thermometer extends StatelessWidget {
       child: Flex(
         direction: Axis.horizontal,
         mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             alignment: Alignment.bottomCenter,
@@ -123,7 +126,7 @@ class Thermometer extends StatelessWidget {
 }
 
 class TemperatureLabel extends StatelessWidget {
-  final Temperature temperature;
+  final TemperatureValueObject temperature;
 
   const TemperatureLabel({
     super.key,

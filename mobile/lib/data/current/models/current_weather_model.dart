@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class CurrentWeather {
+class CurrentWeatherModel {
   final double lastUpdatedEpoch;
   final double temperatureCelsius;
   final double temperatureFahrenheit;
@@ -10,7 +10,7 @@ class CurrentWeather {
   final double humidity;
   final double cloudiness;
   final double uv;
-  CurrentWeather({
+  CurrentWeatherModel({
     required this.lastUpdatedEpoch,
     required this.temperatureCelsius,
     required this.temperatureFahrenheit,
@@ -21,9 +21,8 @@ class CurrentWeather {
     required this.cloudiness,
     required this.uv,
   });
-  
 
-  CurrentWeather copyWith({
+  CurrentWeatherModel copyWith({
     double? lastUpdatedEpoch,
     double? temperatureCelsius,
     double? temperatureFahrenheit,
@@ -34,10 +33,11 @@ class CurrentWeather {
     double? cloudiness,
     double? uv,
   }) {
-    return CurrentWeather(
+    return CurrentWeatherModel(
       lastUpdatedEpoch: lastUpdatedEpoch ?? this.lastUpdatedEpoch,
       temperatureCelsius: temperatureCelsius ?? this.temperatureCelsius,
-      temperatureFahrenheit: temperatureFahrenheit ?? this.temperatureFahrenheit,
+      temperatureFahrenheit:
+          temperatureFahrenheit ?? this.temperatureFahrenheit,
       windMph: windMph ?? this.windMph,
       windKph: windKph ?? this.windKph,
       windDirection: windDirection ?? this.windDirection,
@@ -61,8 +61,8 @@ class CurrentWeather {
     };
   }
 
-  factory CurrentWeather.fromMap(Map<String, dynamic> map) {
-    return CurrentWeather(
+  factory CurrentWeatherModel.fromMap(Map<String, dynamic> map) {
+    return CurrentWeatherModel(
       lastUpdatedEpoch: map['last_updated_epoch']?.toDouble() ?? 0.0,
       temperatureCelsius: map['temp_c']?.toDouble() ?? 0.0,
       temperatureFahrenheit: map['temp_f']?.toDouble() ?? 0.0,
@@ -77,7 +77,8 @@ class CurrentWeather {
 
   String toJson() => json.encode(toMap());
 
-  factory CurrentWeather.fromJson(String source) => CurrentWeather.fromMap(json.decode(source));
+  factory CurrentWeatherModel.fromJson(String source) =>
+      CurrentWeatherModel.fromMap(json.decode(source));
 
   @override
   String toString() {
@@ -87,29 +88,29 @@ class CurrentWeather {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
-    return other is CurrentWeather &&
-      other.lastUpdatedEpoch == lastUpdatedEpoch &&
-      other.temperatureCelsius == temperatureCelsius &&
-      other.temperatureFahrenheit == temperatureFahrenheit &&
-      other.windMph == windMph &&
-      other.windKph == windKph &&
-      other.windDirection == windDirection &&
-      other.humidity == humidity &&
-      other.cloudiness == cloudiness &&
-      other.uv == uv;
+
+    return other is CurrentWeatherModel &&
+        other.lastUpdatedEpoch == lastUpdatedEpoch &&
+        other.temperatureCelsius == temperatureCelsius &&
+        other.temperatureFahrenheit == temperatureFahrenheit &&
+        other.windMph == windMph &&
+        other.windKph == windKph &&
+        other.windDirection == windDirection &&
+        other.humidity == humidity &&
+        other.cloudiness == cloudiness &&
+        other.uv == uv;
   }
 
   @override
   int get hashCode {
     return lastUpdatedEpoch.hashCode ^
-      temperatureCelsius.hashCode ^
-      temperatureFahrenheit.hashCode ^
-      windMph.hashCode ^
-      windKph.hashCode ^
-      windDirection.hashCode ^
-      humidity.hashCode ^
-      cloudiness.hashCode ^
-      uv.hashCode;
+        temperatureCelsius.hashCode ^
+        temperatureFahrenheit.hashCode ^
+        windMph.hashCode ^
+        windKph.hashCode ^
+        windDirection.hashCode ^
+        humidity.hashCode ^
+        cloudiness.hashCode ^
+        uv.hashCode;
   }
 }

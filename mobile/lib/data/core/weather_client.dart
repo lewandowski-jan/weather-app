@@ -9,10 +9,4 @@ class WeatherClient extends WABaseClient {
 
     return Current.fromJson(response.body);
   }
-
-  Future<void> getForecast() async {
-    final response = await get(WeatherClientPath.forecast.getUri());
-
-    return;
-  }
 }
